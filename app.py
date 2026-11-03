@@ -124,7 +124,7 @@ def pantalla_eliminar():
     st.title("Eliminar usuario")
     
     opciones = list(st.session_state.clientes.keys())
-    if no opciones:
+    if not opciones:
         st.info("No hay clientes para eliminar.")
     else:
         eliminar = st.selectbox("Seleccione el cliente a eliminar:", opciones)
