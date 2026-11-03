@@ -181,7 +181,7 @@ def pantalla_perfil():
                 st.rerun()
     else:
         # Si ya tiene datos, los mostramos como en el boceto 2
-        st.subheader(f"Ej: {datos.get('Nombre', '')}")
+        st.subheader(f"{datos.get('Nombre', '')}")
         
         # Convertimos el diccionario a una lista de diccionarios para st.table
         datos_tabla = [{"Campo": k, "Valor": v} for k, v in datos.items()]
@@ -205,7 +205,7 @@ def pantalla_rutina():
     with col1:
         nombre_rutina = st.session_state.clientes.get(cliente, {}).get("Rutina", "Tren superior")
         st.title(f"Rutina de {cliente}")
-        st.subheader(f"(Ej: {nombre_rutina})")
+        st.subheader(f"{nombre_rutina}")
     with col2:
         if st.button("Editar rutina" if not st.session_state.modo_edicion else "Cancelar edición"):
             st.session_state.modo_edicion = not st.session_state.modo_edicion
