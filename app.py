@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="App Gimnasio", page_icon="🏋️‍♂️")
 
 # --- 1. CONFIGURACIÓN INICIAL DEL ESTADO (st.session_state) ---
 if 'clientes' not in st.session_state:
