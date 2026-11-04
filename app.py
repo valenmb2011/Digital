@@ -43,9 +43,10 @@ def volver_inicio():
 def pantalla_inicio():
     st.title("Bienvenido")
     
-    # Buscador de clientes
+   # Buscador de clientes
     st.subheader("Buscar cliente ...")
     buscar = st.text_input("Ingrese el nombre del cliente que busca:", key="input_buscar")
+    
     if st.button("Buscar"):
         encontrado = None
         for key, data in st.session_state.clientes.items():
@@ -53,13 +54,20 @@ def pantalla_inicio():
                 encontrado = key
                 break
         
-        if encontrado:
-            st.success(f"Cliente encontrado: {encontrado}")
-            if st.button(f"Ir al perfil de {encontrado}"):
-                cambiar_pantalla("perfil", encontrado)
-        else:
-            st.error("Cliente no encontrado")
+        # Guardamos el resultado en la memoria temporal
+        st.session_state.cliente_buscado = encontrado if encontrado else "NO_EXISTE"
 
+    # Mostramos el segundo botón de forma independiente
+    if st.session_state.get("cliente_buscado"):
+        if st.session_state.cliente_buscado == "NO_EXISTE":
+            st.error("Cliente no encontrado")
+        else:
+            cliente_hallado = st.session_state.cliente_buscado
+            st.success(f"Cliente encontrado: {cliente_hallado}")
+            if st.button(f"Ir al perfil de {cliente_hallado}"):
+                st.session_state.cliente_buscado = None # Limpiamos la búsqueda
+                cambiar_pantalla("perfil", cliente_hallado)
+                
     st.write("---")
     
     # Lista de usuarios (basado en el boceto 1)
